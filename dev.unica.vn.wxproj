@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<winginx>
+  <project>
+    <name>dev.unica.vn</name>
+    <url>http://dev.unica.vn/</url>
+    <root>home/dev.unica.vn</root>
+  </project>
+</winginx>
