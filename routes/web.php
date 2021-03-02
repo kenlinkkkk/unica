@@ -17,6 +17,8 @@ Route::prefix('/')->name('home.')->namespace('Home')->group(function () {
     Route::get('/', 'HomeController@index')->name('index');
     Route::get('/dang-ky', 'HomeController@viewRegisterPage')->name('register');
     Route::get('/dang-nhap', 'HomeController@viewLoginPage')->name('login');
+
+    Route::get('/test', 'HomeController@testPage')->name('test');
 });
 
 Auth::routes();
