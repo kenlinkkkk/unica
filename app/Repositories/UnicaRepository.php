@@ -7,6 +7,7 @@ namespace App\Repositories;
 use AES_Encryption;
 use Exception;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Session;
 
 class UnicaRepository extends BaseRepository
 {
@@ -38,29 +39,72 @@ class UnicaRepository extends BaseRepository
     {
         $path = '/getToken';
         $response = $this->request($path, $data, 'POST');
-        return $response;
+
+        Session::put('_unica', ['aff_id' => $response->id, 'token' => $response->token]);
+
+        return $response->token;
     }
 
     public function getCourseList()
     {
         $path = '/getCourseList';
-
-//        $response = $this->request($path,'', 'GET');
         return $this->request($path,'', 'GET');
     }
 
-    private function getCourse($data) {
+    public function getCourse($data) {
         $path = '/getCourse';
-
-        $aes = new AES_Encryption(env('UNICA_SECRET_KEY'));
-        $token = $aes->encrypt('491384');
-
         $params = [
             'id' => $data['id'],
-            'aff_id' => 491384,
-            'token' => $token
+            'aff_id' => Session::get('_unica')['id'],
+            'token' => Session::get('_unica')['token']
         ];
 
         return $this->request($path,  $params, 'GET');
+    }
+
+    public function getListCategory() {
+        $path = '/listCategory';
+
+        return $this->request($path, '', 'GET');
+    }
+
+    public function getCourseFromCategory($data)
+    {
+        $path = '/coursecategory';
+
+        $params = [
+            'category_id' => $data['id'],
+            'aff_id' => Session::get('_unica')['id'],
+            'token' => Session::get('_unica')['token'],
+            'page' => $data['page']
+        ];
+
+        return $this->request($path, $params, 'GET');
+    }
+
+    public function getStatusOrder($data) {
+        $path = '/getStatusOrder';
+
+        $params = [
+            'category_id' => $data['id'],
+            'aff_id' => Session::get('_unica')['id'],
+            'token' => Session::get('_unica')['token']
+        ];
+
+        return $this->request($path, $params, 'GET');
+    }
+
+    public function getCourses($data)
+    {
+        $path = '/courses';
+
+        $params = [
+            'aff_id' => Session::get('_unica')['id'],
+            'token' => Session::get('_unica')['token'],
+            'page' => $data['page'],
+            'option' => $data['option']
+        ];
+
+        return $this->request($path, $params, 'GET');
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use App\Http\Controllers\Controller;
 use App\Repositories\UnicaRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use voku\helper\ASCII;
 
 class HomeController extends Controller
@@ -34,7 +35,8 @@ class HomeController extends Controller
             'username' => 'hienhv@vano.vn',
             'password' => 'Vano#2019'
         ];
+        $this->unica->getToken($data);
+        dd($this->unica->getListCategory());
 
-        dd($this->unica->getCourseList());
     }
 }
