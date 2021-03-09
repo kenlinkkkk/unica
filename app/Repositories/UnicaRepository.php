@@ -52,6 +52,12 @@ class UnicaRepository extends BaseRepository
     }
 
     public function getCourse($data) {
+        if (empty(Session::get('_unica'))) {
+            $this->getToken([
+                'username' => 'hienhv@vano.vn',
+                'password' => 'Vano#2019'
+            ]);
+        }
         $path = '/getCourse';
         $params = [
             'id' => $data['id'],

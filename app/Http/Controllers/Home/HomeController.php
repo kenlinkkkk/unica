@@ -26,7 +26,7 @@ class HomeController extends Controller
 
     public function viewLoginPage()
     {
-        return view('layouts.components.login');
+        return view('auth.login');
     }
 
     public function testPage()

@@ -41,7 +41,8 @@
             "App\\": "app/"
         },
         "files": [
-            "config/constants.php"
+            "config/constants.php",
+            "helpers/common_helper.php"
         ],
         "classmap": [
             "database/seeds",

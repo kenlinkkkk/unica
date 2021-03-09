@@ -1,73 +1,34 @@
-@extends('layouts.app')
+@extends('layouts.full')
+
+@section('title'){{ 'Đăng nhập - Unica | VANO' }}@endsection
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
+    <section id="contentReg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-6" id="wrapReg">
+                    <div class="row bg-white rounded">
+                        <div class="col-sm-12 col-md-12">
+                            <img src="{{ asset('assets/client/images/logo.png') }}" class="img-fluid d-block m-auto">
+                            <h4 class="text-center mt-2">ĐĂNG NHẬP</h4>
                         </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                        <div class="col-sm-12 col-md-12 text-center mt-2">
+                            <form method="POST" action="#">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="username" class="form-control" id="username" placeholder="Nhập số điện thoại" required>
                                 </div>
-                            </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" id="username" placeholder="Nhập mật khẩu" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary d-block mt-4 w-100">Đăng nhập</button>
+                                <p>Bạn chưa có tài khoản <span><a href="{{ route('home.register') }}" class="text-color-primary pt-4">Đăng ký ngay</a></span></p>
+                                <a href="#" class="text-danger">Quên mật khẩu?</a>
+                            </form>
                         </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-
-                                @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
 @endsection
